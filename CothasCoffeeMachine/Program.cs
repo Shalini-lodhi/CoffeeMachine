@@ -1,6 +1,23 @@
-var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
+using CothasCoffeeMachine;
+using System.Security.Cryptography.X509Certificates;
 
-app.MapGet("/", () => "Hello World!");
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        SystemMessages.WelcomeMessage();
+        
+        IngradiantType beverage = new IngradiantType();
 
-app.Run();
+        SystemMessages.OptionsMessage();
+        beverage.Name = (Beverage)int.Parse(Console.ReadLine());
+        
+        SystemMessages.CupSizeOptionMessage();
+        beverage.CupSize = (Amount)int.Parse(Console.ReadLine());
+
+
+
+        SystemMessages.ServingMessage(beverage.Name, beverage.CupSize);
+        SystemMessages.EndMessage();
+    }
+}
